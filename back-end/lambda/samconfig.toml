@@ -1,0 +1,9 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "simple-contact-form-stack"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-prk8fob1zft6"
+s3_prefix = "simple-contact-form-stack"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
