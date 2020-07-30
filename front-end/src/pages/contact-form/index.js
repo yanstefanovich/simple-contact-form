@@ -13,6 +13,15 @@ export default () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
+    const [toast, setToast] = useState('')
+
+    const clear = () => {
+        setError('')
+        setTouched('')
+        setName('')
+        setEmail('')
+        setMessage('')
+    }
 
     const validate = () => {
         if (touched.name && name.length > 36)
@@ -77,10 +86,16 @@ export default () => {
                 name
             }
         )
-        console.log(res)
+        if (res.status == 200) {
+            setToast('Success, your message was sent!')
+            clear()
+        } else {
+            setToast('Error sending message. Please try again later.')
+        }
     }
 
     useEffect(() => {
+        if (toast) setToast('')
         setError(validate())
     }, [email, message, name])
 
@@ -103,6 +118,7 @@ export default () => {
                 Send
             </Button>
             {error && <p>*{error}</p>}
+            {toast && <p>{toast}</p>}
         </Form>
     )
 }
