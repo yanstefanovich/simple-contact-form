@@ -33,6 +33,18 @@ const validate = (name, email, message) => {
 
 exports.lambdaHandler = async (event, context) => {
     try {
+        if (event.httpMethod == 'OPTIONS')
+            return {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Access-Control-Allow-Credentials': true,
+                    'Access-Control-Allow-Headers':
+                        'Origin, X-Requested-With, Content-Type, Accept'
+                },
+                statusCode: 200,
+                body: 'OK'
+            }
         console.log('Incoming event:', event)
 
         const { name, email, message } = JSON.parse(event.body)
@@ -48,6 +60,13 @@ message: ${message}`,
         await sns.publish(params).promise()
 
         response = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': '*',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Headers':
+                    'Origin, X-Requested-With, Content-Type, Accept'
+            },
             statusCode: 200,
             body: 'OK'
         }

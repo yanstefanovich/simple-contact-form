@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import { Button, Field, Form, TextArea } from '../../components'
 
@@ -66,9 +67,17 @@ export default () => {
         }
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        alert(`${name} ${email} ${message}`)
+        const res = await axios.post(
+            'https://01lb03wtyi.execute-api.us-east-1.amazonaws.com/Prod/contact/',
+            {
+                email,
+                message,
+                name
+            }
+        )
+        console.log(res)
     }
 
     useEffect(() => {
