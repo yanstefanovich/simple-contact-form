@@ -87,8 +87,8 @@ export default () => {
             }
         )
         if (res.status == 200) {
-            setToast('Success, your message was sent!')
             clear()
+            setToast('Success, your message was sent!')
         } else {
             setToast('Error sending message. Please try again later.')
         }
