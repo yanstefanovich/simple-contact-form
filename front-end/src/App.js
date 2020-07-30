@@ -1,9 +1,14 @@
 import React from 'react'
+import { Router } from '@reach/router'
+
 import { Navigation } from './components'
-import { Router, Link } from '@reach/router'
+import { ContactForm } from './pages'
 
 export default () => (
     <div>
         <Navigation />
+        <Router>
+            <ContactForm path='/' />
+        </Router>
     </div>
 )
