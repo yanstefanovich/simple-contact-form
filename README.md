@@ -1,11 +1,18 @@
 # simple-contact-form
 
+[You can check out the Live Version here](https://form.yamcraft.com)
+If you actually submit a proper form, I just might reply :)
+
 ## Front-end
-Simple create-react-app React web page. Hosted statically on S3 with CloudFront.
+React web page instantiated with create-react-app.
+I am statically hosting my instance on AWS S3 with AWS CloudFront for distribution.
 
 ## Back-end
-Leverage SAM for a basic setup with AWS Api Gateway, Lambda and SNS. Accepts HTTP request and publishes a message to SNS that gets sent as an email to the subscribers of the topic.
-To deploy, run `sam build` and `sam deploy --guided`
+Leverage [AWS SAM](https://aws.amazon.com/serverless/sam/) for a basic setup: AWS Api Gateway -> Lambda -> SNS.
+Accepts HTTP POST request and publishes a message to SNS. SNS will email/notify the subscribers of the topic.
+It allows CORS by default for quick set up.
+To build run `sam build`
+To deploy run `sam deploy --guided`
 
 
-Note: When you try to run `sam local invoke` on the lambda, locally `!Ref SNS` will not actually return the TopicARN of your SNS Topic, you will have to insert it as a contant into your code in development.
+Note: When/if you run `sam local invoke` for local testing/development, `!Ref SNS` will not actually return the TopicARN of your SNS Topic. You either have to temporarily insert the value as a contant in your code or modify the environment variable in the template.yaml file.
